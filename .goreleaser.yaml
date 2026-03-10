@@ -41,3 +41,5 @@ release:
   github:
     owner: limxdynamics
     name: gradmotion-cli
+  extra_files:
+    - glob: npm/skills/gm-cli/SKILL.md
