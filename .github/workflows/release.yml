@@ -1,0 +1,53 @@
+# Gradmotion CLI 发布流水线
+# 推送 tag（如 v0.1.0）后自动发布到 GitHub Release 和 npm
+# 需在 GitHub 仓库 Settings → Secrets and variables → Actions 中配置：
+#   NPM_TOKEN：npm Automation Token（用于 npm publish）
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: '~> v2'
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync npm version
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          cd npm && npm version ${VERSION} --no-git-tag-version --allow-same-version
+
+      - name: Publish npm package
+        run: cd npm && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

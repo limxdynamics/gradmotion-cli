@@ -38,7 +38,7 @@ const binPath = resolveBinaryPath();
 if (!fs.existsSync(binPath)) {
   console.error(
     `[gm] Binary not found at ${binPath}\n` +
-    `[gm] Try reinstalling: npm install -g @limx-gradmotion/gradmotion-cli`
+    `[gm] Try reinstalling: npm install -g @limxdynatic-gradmotion/gradmotion-cli`
   );
   process.exit(1);
 }

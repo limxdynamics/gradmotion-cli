@@ -307,7 +307,7 @@ gm --version
    git tag -a v0.1.1 -m "Release v0.1.1"
    git push origin v0.1.1
    ```
-3. 流水线自动运行：构建多平台二进制 → 创建 GitLab Release 并上传 → 发布 npm 包 `@limx-gradmotion/gradmotion-cli@0.1.1`。
+3. 流水线自动运行：构建多平台二进制 → 创建 GitHub Release 并上传 → 发布 npm 包 `@limxdynatic-gradmotion/gradmotion-cli@0.1.0`。
 
 ### 8.3 触发规则
 

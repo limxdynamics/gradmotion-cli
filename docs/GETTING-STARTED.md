@@ -10,7 +10,7 @@
 | 步骤 | 操作 |
 |------|------|
 | **1. 创建 API Key** | 登录 Gradmotion → 左下角头像 → **API Key 管理** → **新建** → 填写名称并**立即复制**生成的 Key（格式 `gm_sk_xxxxxxxx`，仅显示一次）。 |
-| **2. 安装 CLI** | 按系统下载并安装 `gm`（见下方 [2. 安装 CLI](#2-安装-cli)）。安装后执行 `gm --version` 确认。 |
+| **2. 安装 CLI** | 执行 `npm install -g @limxdynatic-gradmotion/gradmotion-cli`（需 Node.js >= 16）。安装后执行 `gm --version` 确认。 |
 | **3. 配置** | `gm config set base_url "https://spaces.gradmotion.com/prod-api"`<br>`gm auth login --api-key "gm_sk_你的Key"` |
 | **4. 验证** | `gm auth status`（本地）→ `gm auth whoami`（服务端）。 |
 | **5. 安装 Skill** | `mkdir -p ~/.cursor/skills/gm-cli`，将 [SKILL.md](../npm/skills/gm-cli/SKILL.md) 放到该目录；或在 Cursor **Settings → Features → Agent Skills** 确认 Skills 路径为 `~/.cursor/skills/`。 |
@@ -56,45 +56,17 @@
 
 ## 2. 安装 CLI
 
-根据你的操作系统选择对应的安装方式。
+推荐通过 npm 一行命令安装，自动匹配当前系统和架构（macOS / Linux / Windows，x64 / arm64）。
 
-### 2.1 macOS（Apple Silicon / Intel）
-
-**下载预编译二进制**
+### 2.1 通过 npm 安装（推荐）
 
 ```bash
-# Apple Silicon (M 系列芯片)
-curl -L http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_darwin_arm64.tar.gz -o gm.tar.gz
-tar -xzf gm.tar.gz
-sudo install -m 0755 gm /usr/local/bin/gm
-
-# Intel 芯片
-curl -L http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_darwin_amd64.tar.gz -o gm.tar.gz
-tar -xzf gm.tar.gz
-sudo install -m 0755 gm /usr/local/bin/gm
+npm install -g @limxdynatic-gradmotion/gradmotion-cli
 ```
 
-### 2.2 Linux（amd64 / arm64）
+> 需要 Node.js >= 16，安装后会自动选择对应平台的二进制。
 
-```bash
-# amd64
-curl -L http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_linux_amd64.tar.gz -o gm.tar.gz
-tar -xzf gm.tar.gz
-sudo install -m 0755 gm /usr/local/bin/gm
-
-# arm64
-curl -L http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_linux_arm64.tar.gz -o gm.tar.gz
-tar -xzf gm.tar.gz
-sudo install -m 0755 gm /usr/local/bin/gm
-```
-
-### 2.3 Windows
-
-1. 下载 [`gradmotion-cli_0.1.2_windows_amd64.zip`](http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_windows_amd64.zip)（arm64 用户请下载 [`gradmotion-cli_0.1.2_windows_arm64.zip`](http://8.141.22.226/Jacky/gradmotion-cli/-/releases/v0.1.2/downloads/gradmotion-cli_0.1.2_windows_arm64.zip)）。
-2. 解压，将 `gm.exe` 放到已加入 `PATH` 的目录（如 `C:\Windows\System32` 或自定义目录）。
-3. 打开 PowerShell 验证：`gm --version`。
-
-### 2.4 验证安装
+### 2.2 验证安装
 
 ```bash
 gm --version
@@ -103,7 +75,7 @@ gm --version
 输出示例：
 
 ```
-gradmotion-cli v0.1.2 (darwin/arm64)
+gradmotion-cli v0.1.0 (darwin/arm64)
 ```
 
 ---
