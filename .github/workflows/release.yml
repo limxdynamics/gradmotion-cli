@@ -63,5 +63,9 @@ jobs:
           cd npm && npm version ${VERSION} --no-git-tag-version --allow-same-version
 
       - name: Publish npm package
-        # vendor 已由上一步填好，--ignore-scripts 跳过 prepack 避免重复编译
-        run: cd npm && npm publish --access public --ignore-scripts
+        # vendor 已由上一步填好，跳过 prepack 避免重复编译
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > npm/.npmrc
+          cd npm && npm publish --access public --ignore-scripts
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
