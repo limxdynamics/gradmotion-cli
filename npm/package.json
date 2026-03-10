@@ -1,6 +1,6 @@
 {
   "name": "@limxdynatic-gradmotion/gradmotion-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gradmotion CLI — 训练任务管理命令行工具，支持 Agent 集成",
   "bin": {
     "gm": "bin/gm.js"
