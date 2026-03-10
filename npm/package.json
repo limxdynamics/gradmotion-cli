@@ -6,7 +6,7 @@
     "gm": "bin/gm.js"
   },
   "scripts": {
-    "prepack": "cd .. && VERSION=v$npm_package_version ./scripts/build-all.sh && rm -rf npm/vendor && mkdir -p npm/vendor && cp dist/gm-* npm/vendor/",
+    "prepack": "cd .. && (ls dist/gm-* 2>/dev/null || VERSION=v$npm_package_version ./scripts/build-all.sh) && rm -rf npm/vendor && mkdir -p npm/vendor && cp dist/gm-* npm/vendor/",
     "postinstall": "node scripts/postinstall.js"
   },
   "files": [

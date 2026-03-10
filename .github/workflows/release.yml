@@ -42,6 +42,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract binaries from archives for npm
+        run: |
+          cd dist
+          # 解压各平台压缩包，提取裸二进制为 gm-<os>-<arch> 格式
+          tar -xzf gm-darwin-amd64.tar.gz  && mv gm gm-darwin-amd64
+          tar -xzf gm-darwin-arm64.tar.gz  && mv gm gm-darwin-arm64
+          tar -xzf gm-linux-amd64.tar.gz   && mv gm gm-linux-amd64
+          tar -xzf gm-linux-arm64.tar.gz   && mv gm gm-linux-arm64
+          unzip -o gm-windows-amd64.zip    && mv gm.exe gm-windows-amd64.exe
+          unzip -o gm-windows-arm64.zip    && mv gm.exe gm-windows-arm64.exe
+
       - name: Sync npm version
         run: |
           VERSION=${GITHUB_REF_NAME#v}
