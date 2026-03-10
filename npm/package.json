@@ -1,0 +1,44 @@
+{
+  "name": "@limx-gradmotion/gradmotion-cli",
+  "version": "0.1.1",
+  "description": "Gradmotion CLI — 训练任务管理命令行工具，支持 Agent 集成",
+  "bin": {
+    "gm": "bin/gm.js"
+  },
+  "scripts": {
+    "prepack": "cd .. && VERSION=v$npm_package_version ./scripts/build-all.sh && rm -rf npm/vendor && mkdir -p npm/vendor && cp dist/gm-* npm/vendor/",
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "vendor/",
+    "skills/"
+  ],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limxdynamics/gradmotion-cli"
+  },
+  "homepage": "https://github.com/limxdynamics/gradmotion-cli",
+  "keywords": [
+    "gradmotion",
+    "cli",
+    "training",
+    "ml",
+    "agent"
+  ],
+  "license": "MIT",
+  "author": "LimX Dynamics"
+}
