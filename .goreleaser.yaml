@@ -35,7 +35,14 @@ checksum:
   disable: true
 
 changelog:
-  disable: true
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^chore:"
+      - "^docs:"
+      - "Merge pull request"
+      - "Merge branch"
 
 release:
   github:
