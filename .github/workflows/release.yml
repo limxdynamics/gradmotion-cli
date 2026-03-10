@@ -52,6 +52,10 @@ jobs:
           tar -xzf gm-linux-arm64.tar.gz   && mv gm gm-linux-arm64
           unzip -o gm-windows-amd64.zip    && mv gm.exe gm-windows-amd64.exe
           unzip -o gm-windows-arm64.zip    && mv gm.exe gm-windows-arm64.exe
+          # 填充 npm/vendor，只复制裸二进制（不含压缩包）
+          rm -rf ../npm/vendor && mkdir -p ../npm/vendor
+          cp gm-darwin-amd64 gm-darwin-arm64 gm-linux-amd64 gm-linux-arm64 \
+             gm-windows-amd64.exe gm-windows-arm64.exe ../npm/vendor/
 
       - name: Sync npm version
         run: |
@@ -59,6 +63,5 @@ jobs:
           cd npm && npm version ${VERSION} --no-git-tag-version --allow-same-version
 
       - name: Publish npm package
-        run: cd npm && npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # vendor 已由上一步填好，--ignore-scripts 跳过 prepack 避免重复编译
+        run: cd npm && npm publish --access public --ignore-scripts
