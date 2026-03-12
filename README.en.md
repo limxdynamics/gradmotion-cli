@@ -1,4 +1,4 @@
-English | [中文](./README.md)
+<h1>English | <a href="./README.md">中文</a></h1>
 
 # Gradmotion CLI
 
