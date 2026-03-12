@@ -1,8 +1,8 @@
+English | [中文](./README.md)
+
 # Gradmotion CLI
 
 Cross-platform CLI for managing training tasks and projects on [Gradmotion](https://spaces.gradmotion.com). It outputs structured JSON by default and is designed for AI Agent integration.
-
-[中文版本](./README.md)
 
 ## Features
 

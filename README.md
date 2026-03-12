@@ -1,8 +1,8 @@
+[English](./README.en.md) | 中文
+
 # Gradmotion CLI
 
 跨平台命令行工具，用于管理 [Gradmotion](https://spaces.gradmotion.com) 平台上的训练任务与项目。默认输出结构化 JSON，天然适配 AI Agent 集成。
-
-[English version](./README.en.md)
 
 ## 特性
 
