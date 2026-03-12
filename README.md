@@ -2,6 +2,8 @@
 
 跨平台命令行工具，用于管理 [Gradmotion](https://spaces.gradmotion.com) 平台上的训练任务与项目。默认输出结构化 JSON，天然适配 AI Agent 集成。
 
+[English version](./README.en.md)
+
 ## 特性
 
 - **跨平台** — 单一二进制，支持 macOS / Linux / Windows（amd64 & arm64）
@@ -283,6 +285,7 @@ git push origin v0.1.0
 | [编译与打包](./docs/BUILD.md) | 本地编译、跨平台打包、GoReleaser 发布指南 |
 | [技术规格](./docs/Gradmotion-CLI-SPEC.md) | 架构设计、API 映射、输出规范 |
 | [Agent Skill](./npm/skills/gm-cli/SKILL.md) | Cursor Agent 操作规范与参数校验规则 |
+| [English README](./README.en.md) | 英文版本说明文档 |
 
 ## 许可证
 
