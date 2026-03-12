@@ -1,4 +1,4 @@
-<h1>English | <a href="./README_cn.md">中文</a></h1>
+**English | [中文](./README_cn.md)**
 
 # Gradmotion CLI
 
@@ -240,7 +240,7 @@ See [Build Guide](./docs/BUILD.md) for details.
 | [Build & Release](./docs/BUILD.md) | Local build, cross-platform packaging, and GoReleaser guide |
 | [Tech Spec](./docs/Gradmotion-CLI-SPEC.md) | Architecture, API mapping, and output standards |
 | [Agent Skill](./npm/skills/gm-cli/SKILL.md) | Cursor Agent operation and parameter validation rules |
-| [中文 README](./README_cn.md) | Chinese documentation |
+| [Chinese README](./README_cn.md) | Chinese documentation |
 
 ## License
 

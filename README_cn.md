@@ -1,4 +1,4 @@
-<h1><a href="./README.md">English</a> | 中文</h1>
+**[English](./README.md) | 中文**
 
 # Gradmotion CLI
 
@@ -285,7 +285,7 @@ git push origin v0.1.0
 | [编译与打包](./docs/BUILD.md) | 本地编译、跨平台打包、GoReleaser 发布指南 |
 | [技术规格](./docs/Gradmotion-CLI-SPEC.md) | 架构设计、API 映射、输出规范 |
 | [Agent Skill](./npm/skills/gm-cli/SKILL.md) | Cursor Agent 操作规范与参数校验规则 |
-| [English README](./README.md) | 英文版本说明文档 |
+| [英文 README](./README.md) | 英文版本说明文档 |
 
 ## 许可证
 
