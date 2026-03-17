@@ -16,6 +16,7 @@ description: Operates gm-cli (gm): auth/config/profile/project/task workflows, s
 - 不要在对话输出中回显用户的 `api-key` 或完整密钥内容。
 - 高风险操作（`project delete`、`task stop/delete`、`task batch stop/delete`）默认需要二次确认；只有用户明确要求无人值守时才加 `--yes`。
 - 涉及文件路径一律使用相对路径（例如 `--file ./payload.json`）。
+- Agent 生成的临时 JSON 文件（如 `create-*.json`、`edit-*.json`、`copy-*.json` 等），在对应的 CLI 命令执行成功后应**立即删除**，避免在工作目录中残留过期的临时文件。
 
 ## 帮助与版本
 - 总览：`gm --help`
@@ -153,6 +154,57 @@ description: Operates gm-cli (gm): auth/config/profile/project/task workflows, s
 - `gm task create --file ./create-train.json`
 - 从返回结果取 `taskId`，执行 `gm task run --task-id "task_xxx"`
 - `gm task logs --task-id "task_xxx" --follow`
+
+## 最小可运行 JSON 模版（恢复训练任务）
+下面是一个“基于已有任务 checkpoint 恢复训练”的最小模板（请替换示例值）：
+
+```json
+{
+  "taskBaseInfo": {
+    "projectId": "proj_xxx",
+    "taskType": "1",
+    "trainType": "2",
+    "taskName": "resume-train-task",
+    "taskDescription": "resume from existing checkpoint",
+    "taskTag": [],
+    "goodsId": "goods_xxx",
+    "imageId": "BJX00000001",
+    "imageVersion": "V000057",
+    "personalDataPath": "/personal"
+  },
+  "taskCodeInfo": {
+    "codeType": "2",
+    "codeUrl": "[{\"codeUrl\":\"https://github.com/your-org/your-repo.git\",\"versionType\":\"1\",\"versionName\":\"main\"}]",
+    "mainCodeUri": "train.py",
+    "hparamsPath": "configs/train.yaml",
+    "startScript": "gm-run train.py --headless --max_iterations=4000",
+    "isOpen": "1",
+    "checkPointFilePath": "upload/2026/3/17/model_3000_xxx.pt",
+    "checkPointMountPath": "your-project-root/",
+    "resumeFromTaskId": "task_source_xxx",
+    "resumeFromTaskName": "source-task-name",
+    "resumeFromCheckPoint": "3000"
+  },
+  "runtimeReminderConfig": {
+    "enableRuntimeReminder": false,
+    "reminderDurations": []
+  }
+}
+```
+
+建议恢复步骤：
+- **先获取任务列表**：执行 `gm task list --page 1 --limit 50`，展示任务列表供用户选择。
+- **用户选择源任务**：根据列表中的 `taskId`、任务名称、任务状态等，让用户确认或选择要恢复的源任务（得到 `task_source_xxx`）。
+- **再获取该任务的 checkpoint**：执行 `gm task model list --task-id "task_source_xxx" --page-num 1 --page-size 20`，找到目标 checkpoint。
+- 将返回结果中的 `policUrl` 填入 `taskCodeInfo.checkPointFilePath`
+- 将 `resumeFromTaskId` / `resumeFromTaskName` / `resumeFromCheckPoint` 与源任务、源 checkpoint 保持一致
+- `gm task create --file ./create-resume-train.json`
+- 如需启动，再执行 `gm task run --task-id "task_xxx"`
+
+恢复训练任务的软提示：
+1. 优先复用源任务的 `goodsId`、`imageId`、`imageVersion`、`codeUrl`、`mainCodeUri`、`hparamsPath`，避免环境不一致导致恢复失败。
+2. `checkPointFilePath` 应优先使用 `gm task model list` 返回的 `policUrl`，不要手写猜测路径。
+3. 若用户只是想“基于 checkpoint 新建恢复任务”，默认先 `create`，不要自动 `run`；只有用户明确要求时才执行运行。
 
 ### 关于本地 zip 压缩包上传（`codeType=1`）—— 不支持
 
