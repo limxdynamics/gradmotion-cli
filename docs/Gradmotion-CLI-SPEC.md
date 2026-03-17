@@ -276,6 +276,9 @@ gm
   - 参数：`--page/--limit`
 - `gm task info`  
   - API：`GET /api/task/info/{task_id}`
+- `gm task model list`  
+  - API：`POST /api/task/model/info`
+  - 参数：`--task-id --checkpoint --page-num --page-size`
 - `gm task run`  
   - API：`POST /api/task/run`
 - `gm task stop`  
@@ -330,6 +333,7 @@ gradmotion-cli/
 | `gm task edit` | `POST /api/task/edit` | 编辑任务 |
 | `gm task list` | `POST /api/task/list` | 任务列表 |
 | `gm task info` | `GET /api/task/info/{task_id}` | 任务详情/状态 |
+| `gm task model list` | `POST /api/task/model/info` | 任务 checkpoint 列表 |
 | `gm task run` | `POST /api/task/run` | 运行任务 |
 | `gm task stop` | `POST /api/task/stop` | 停止任务 |
 | `gm task restart` | `POST /api/task/restart` | 继续运行 |

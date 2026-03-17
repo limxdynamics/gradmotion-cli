@@ -28,6 +28,7 @@ func NewCommand() *cobra.Command {
 		newCopyCommand(),
 		newListCommand(),
 		newInfoCommand(),
+		newModelCommand(),
 		newRunCommand(),
 		newStopCommand(),
 		newDeleteCommand(),
@@ -123,6 +124,59 @@ func newInfoCommand() *cobra.Command {
 		},
 	}
 	cmd.Flags().StringVar(&taskID, "task-id", "", "task id")
+	return cmd
+}
+
+func newModelCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "model",
+		Short: "Task model commands",
+	}
+	cmd.AddCommand(newModelListCommand())
+	return cmd
+}
+
+func newModelListCommand() *cobra.Command {
+	var (
+		taskID     string
+		checkpoint string
+		pageNum    int
+		pageSize   int
+		bodyFlags  rawBodyFlags
+	)
+	cmd := &cobra.Command{
+		Use:   "list",
+		Short: "List task model checkpoints",
+		RunE: func(_ *cobra.Command, _ []string) error {
+			body, err := parseRawBody(bodyFlags)
+			if err != nil {
+				return shared.EmitLocalError("gm task model list", "INVALID_ARGUMENT", err.Error(), "use --data or --file with JSON")
+			}
+			if body == nil {
+				body = map[string]any{}
+			}
+			if strings.TrimSpace(taskID) != "" {
+				body["taskId"] = strings.TrimSpace(taskID)
+				body["task_id"] = strings.TrimSpace(taskID)
+			}
+			if strings.TrimSpace(checkpoint) != "" {
+				body["checkpoint"] = strings.TrimSpace(checkpoint)
+			}
+			body["pageNum"] = pageNum
+			body["pageSize"] = pageSize
+			body["page_num"] = pageNum
+			body["page_size"] = pageSize
+			if body["taskId"] == nil && body["task_id"] == nil {
+				return shared.EmitLocalError("gm task model list", "INVALID_ARGUMENT", "task-id is required", "use --task-id or --file/--data with taskId")
+			}
+			return shared.CallAPI("gm task model list", "POST", "/task/model/info", body, nil)
+		},
+	}
+	cmd.Flags().StringVar(&taskID, "task-id", "", "task id")
+	cmd.Flags().StringVar(&checkpoint, "checkpoint", "", "checkpoint filter")
+	cmd.Flags().IntVar(&pageNum, "page-num", 1, "page number")
+	cmd.Flags().IntVar(&pageSize, "page-size", 10, "page size")
+	addRawBodyFlags(cmd, &bodyFlags)
 	return cmd
 }
 

@@ -65,6 +65,7 @@ description: Operates gm-cli (gm): auth/config/profile/project/task workflows, s
 ## Task 常用操作
 - 列表：`gm task list --page 1 --limit 50`
 - 详情：`gm task info --task-id "task_xxx"`
+- Checkpoint 列表：`gm task model list --task-id "task_xxx" --page-num 1 --page-size 20`
 - 复制：`gm task copy --file ./copy.json`
 - 运行：`gm task run --task-id "task_xxx"`
 - 停止：`gm task stop --task-id "task_xxx"`（会二次确认）
@@ -263,7 +264,16 @@ gm task edit --file ./edit-task.json
 `STRICT`：
 - `task-id`：必填，长度 `1..20`
 
-### 5) `gm task run` -> `POST /api/task/run` -> `TaskOperation`
+### 5) `gm task model list` -> `POST /api/task/model/info` -> `TaskModelPagesModel`
+`STRICT`：
+- `task-id`：必填，长度 `1..20`
+
+`WARN`：
+- `page-num`：建议 `>=1`
+- `page-size`：建议 `1..200`
+- `checkpoint`：可选筛选条件
+
+### 6) `gm task run` -> `POST /api/task/run` -> `TaskOperation`
 `STRICT`：
 - 请求体 `task_id`：必填，长度 `1..20`
 
@@ -271,14 +281,14 @@ gm task edit --file ./edit-task.json
 - 任务状态应为草稿态（后端要求 `task_status == "0"`）
 - 任务应已绑定可用资源（如 `goodsId/imageId/goodsBackId` 完整）
 
-### 6) `gm task stop` -> `POST /api/task/stop` -> `TaskOperation`
+### 7) `gm task stop` -> `POST /api/task/stop` -> `TaskOperation`
 `STRICT`：
 - 请求体 `task_id`：必填，长度 `1..20`
 
 `WARN`（执行前建议先 `task info` 预检）：
 - 后端不允许停止状态 `0/5/6` 的任务
 
-### 7) `gm task delete` -> `POST /api/task/del` -> `TaskDelModel`
+### 8) `gm task delete` -> `POST /api/task/del` -> `TaskDelModel`
 `STRICT`：
 - 请求体 `task_id`：必填，长度 `1..20`
 
