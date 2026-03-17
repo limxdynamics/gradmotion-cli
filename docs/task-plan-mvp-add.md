@@ -78,7 +78,7 @@ graph TD
   - `gm task env get`
 - **验收标准**:
   - 新子命令均可 `--help`
-  - 不影响既有 `create/edit/list/info/run/stop/restart/delete/logs/params/batch`
+  - 不影响既有 `create/edit/list/info/run/stop/delete/logs/params/batch`
 - **相关文件**: `internal/commands/task/task.go`
 
 ### TASK-003: 实现绝对路径模式 + project list/create/info

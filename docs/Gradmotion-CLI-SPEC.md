@@ -243,7 +243,6 @@ gm
 │   ├── info
 │   ├── run
 │   ├── stop
-│   ├── restart
 │   ├── delete
 │   ├── logs
 │   ├── params
@@ -283,8 +282,6 @@ gm
   - API：`POST /api/task/run`
 - `gm task stop`  
   - API：`POST /api/task/stop`
-- `gm task restart`  
-  - API：`POST /api/task/restart`
 - `gm task delete`  
   - API：`POST /api/task/del`
 - `gm task logs`  
@@ -336,7 +333,6 @@ gradmotion-cli/
 | `gm task model list` | `POST /api/task/model/info` | 任务 checkpoint 列表 |
 | `gm task run` | `POST /api/task/run` | 运行任务 |
 | `gm task stop` | `POST /api/task/stop` | 停止任务 |
-| `gm task restart` | `POST /api/task/restart` | 继续运行 |
 | `gm task delete` | `POST /api/task/del` | 删除任务 |
 | `gm task logs` | `POST /api/task/console/log` | 任务日志 |
 | `gm task params submit` | `POST /api/task/hp/up` | 提交超参 |
@@ -399,8 +395,6 @@ modules:
         path: /api/task/run
       - method: POST
         path: /api/task/stop
-      - method: POST
-        path: /api/task/restart
       - method: POST
         path: /api/task/del
       - method: POST

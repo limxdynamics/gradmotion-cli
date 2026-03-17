@@ -87,7 +87,6 @@ gradmotion
 │   ├── info
 │   ├── run
 │   ├── stop
-│   ├── restart
 │   ├── delete
 │   ├── logs
 │   ├── params
@@ -112,7 +111,6 @@ gradmotion
 | 任务详情/状态 | 查询任务状态与详情 | P0 |
 | 任务运行 | 启动训练任务 | P0 |
 | 任务停止 | 停止训练任务 | P0 |
-| 任务继续 | 继续运行任务 | P0 |
 | 任务删除 | 删除任务 | P0 |
 | 任务日志 | 查询任务日志 | P0 |
 | 训练参数提交 | 批量提交训练超参 | P0 |
@@ -228,7 +226,6 @@ graph TD
 | `gm task info` | `GET /api/task/info/{task_id}` | 任务详情/状态 |
 | `gm task run` | `POST /api/task/run` | 运行任务 |
 | `gm task stop` | `POST /api/task/stop` | 停止任务 |
-| `gm task restart` | `POST /api/task/restart` | 继续运行 |
 | `gm task delete` | `POST /api/task/del` | 删除任务 |
 | `gm task logs` | `POST /api/task/console/log` | 任务日志 |
 | `gm task params submit` | `POST /api/task/hp/up` | 提交超参 |
@@ -308,9 +305,6 @@ modules:
       - name: stop
         priority: P0
         description: 停止任务
-      - name: restart
-        priority: P0
-        description: 继续运行
       - name: delete
         priority: P0
         description: 删除任务

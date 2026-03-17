@@ -483,6 +483,7 @@ CLI 已内置兼容，无需手动处理路径拼接。
 |------|------|
 | 查看任务列表 | `gm task list --page 1 --limit 50` |
 | 查看任务详情 | `gm task info --task-id "<ID>"` |
+| 查看任务 checkpoint 列表 | `gm task model list --task-id "<ID>" --page-num 1 --page-size 20` |
 | 创建任务 | `gm task create --file ./create.json` 或 `--data '{"...":"..."}'` |
 | 编辑任务 | `gm task edit --file ./edit.json`（需先 `task info` 取全量再改） |
 | 复制任务 | `gm task copy --file ./task-copy.json` |

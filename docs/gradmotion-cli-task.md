@@ -132,7 +132,7 @@ graph TD
 - **优先级**: P0
 - **依赖**: TASK-002, TASK-003, TASK-004
 - **模块**: task
-- **描述**: 实现 create/edit/list/info/run/stop/restart/delete 命令与参数映射。
+- **描述**: 实现 create/edit/list/info/run/stop/delete 命令与参数映射。
 - **验收标准**:
   - 命令与 API 映射准确
   - `--page/--limit` 生效

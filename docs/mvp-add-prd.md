@@ -28,7 +28,6 @@
 ### 5) 任务运行控制（闭环必需）
 - `POST /task/run`：运行任务
 - `POST /task/stop`：停止任务
-- `POST /task/restart`：继续运行任务
 - `POST /task/del`：删除任务
 
 ### 6) 任务查询与可观测（闭环必需）
