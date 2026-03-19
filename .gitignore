@@ -9,4 +9,4 @@ npm/.npmrc
 .DS_Store
 
 # Documentation (internal only)
-docs/
+/docs/

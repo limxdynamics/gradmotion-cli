@@ -13,7 +13,8 @@
     "bin/",
     "scripts/",
     "vendor/",
-    "skills/"
+    "skills/",
+    "docs/"
   ],
   "os": [
     "darwin",
