@@ -229,7 +229,7 @@ func defaultConfig() FileConfig {
 
 func defaultProfile() Profile {
 	return Profile{
-		BaseURL:     "http://8.141.22.122:9096",
+		BaseURL:     "https://spaces.gradmotion.com/dev-api",
 		Timeout:     defaultTimeout,
 		Retry:       defaultRetry,
 		Concurrency: defaultConcurrency,
