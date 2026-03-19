@@ -7,3 +7,6 @@ npm/vendor/
 # npm auth token (generated in CI, must not be committed)
 npm/.npmrc
 .DS_Store
+
+# Documentation (internal only)
+docs/
