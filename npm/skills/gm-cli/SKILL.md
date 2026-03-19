@@ -89,7 +89,9 @@ description: Operates gm-cli (gm): auth/config/profile/project/task workflows, s
 
 图表/超参/环境：
 - 图表 keys：`gm task data keys --task-id "task_xxx"`
-- 图表数据：`gm task data get --task-id "task_xxx" --data-key "train/loss"`
+- 图表数据（加速模式）：`gm task data get --task-id "task_xxx" --data-key "Train/mean_reward" --sampling-mode "accelerate" --max-data-points 10000 --end-time "2026-03-19 15:00:00"`
+- 图表数据（精细模式）：`gm task data get --task-id "task_xxx" --data-key "Train/mean_reward" --sampling-mode "precise" --end-time "2026-03-19 15:00:00"`
+  > **采样模式说明**：已完成/已终止的任务可选 `accelerate`（加速）或 `precise`（精细）；运行中的任务只能使用 `precise` 模式。`--end-time` 必传，通常传当前时间。
 - 图表下载：`gm task data download --task-id "task_xxx"`
 - 超参读取：`gm task hp get --task-id "task_xxx"`
 - 运行环境：`gm task env get --task-id "task_xxx"`
@@ -427,11 +429,14 @@ gm task edit --file ./edit-task.json
 ### 21) `gm task data get` -> `POST /api/task/data/info` -> `GetDataInfoModel`
 `STRICT`：
 - `task_id`：必填，长度 `1..20`
-- `data_key`：必填
+- `data_key`：必填（先通过 `gm task data keys` 获取可用 key 列表）
+- `end_time`：必填，格式 `YYYY-MM-DD HH:mm:ss`，通常传**当前时间**
+- `sampling_mode`：必填，取值 `precise`（精细）或 `accelerate`（加速）
+  - 运行中的任务：只能使用 `precise`
+  - 已完成/已终止的任务：可选 `precise` 或 `accelerate`
 
 `WARN`：
-- `sampling_mode`：建议 `precise|accelerate`
-- `max_data_points`：建议正整数
+- `max_data_points`：加速模式下建议传入，默认 `10000`，正整数；精细模式下可不传
 
 ### 22) `gm task data download` -> `GET /api/task/data/download/{task_id}`
 `STRICT`：
