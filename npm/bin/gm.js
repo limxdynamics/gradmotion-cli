@@ -38,7 +38,7 @@ const binPath = resolveBinaryPath();
 if (!fs.existsSync(binPath)) {
   console.error(
     `[gm] Binary not found at ${binPath}\n` +
-    `[gm] Try reinstalling: npm install -g @limxdynamics/gm-cli`
+    `[gm] Try reinstalling: npm install -g @jacky777/gm-cli`
   );
   process.exit(1);
 }

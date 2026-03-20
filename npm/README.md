@@ -15,7 +15,7 @@ Cross-platform CLI for managing training tasks and projects on [Gradmotion](http
 ## Installation
 
 ```bash
-npm install -g @limxdynamics/gm-cli
+npm install -g @jacky777/gm-cli
 ```
 
 > Requires Node.js >= 16. The installer auto-selects the correct binary for your OS/architecture.

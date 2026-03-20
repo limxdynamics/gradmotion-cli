@@ -1,5 +1,5 @@
 {
-  "name": "@limxdynamics/gm-cli",
+  "name": "@jacky777/gm-cli",
   "version": "0.1.4",
   "description": "Gradmotion CLI — 训练任务管理命令行工具，支持 Agent 集成",
   "bin": {

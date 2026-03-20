@@ -10,7 +10,7 @@
 | 步骤 | 操作 |
 |------|------|
 | **1. 创建 API Key** | 登录 Gradmotion → 左下角头像 → **API Key 管理** → **新建** → 填写名称并**立即复制**生成的 Key（格式 `gm_sk_xxxxxxxx`，仅显示一次）。 |
-| **2. 安装 CLI** | 执行 `npm install -g @limxdynamics/gm-cli`（需 Node.js >= 16）。安装后执行 `gm --version` 确认。 |
+| **2. 安装 CLI** | 执行 `npm install -g @jacky777/gm-cli`（需 Node.js >= 16）。安装后执行 `gm --version` 确认。 |
 | **3. 配置** | `gm config set base_url "https://spaces.gradmotion.com/dev-api"`<br>`gm auth login --api-key "gm_sk_你的Key"` |
 | **4. 验证** | `gm auth status`（本地）→ `gm auth whoami`（服务端）。 |
 | **5. 安装 Skill** | `mkdir -p ~/.cursor/skills/gm-cli`，将 [SKILL.md](../npm/skills/gm-cli/SKILL.md) 放到该目录；或在 Cursor **Settings → Features → Agent Skills** 确认 Skills 路径为 `~/.cursor/skills/`。 |
@@ -61,7 +61,7 @@
 ### 2.1 通过 npm 安装（推荐）
 
 ```bash
-npm install -g @limxdynamics/gm-cli
+npm install -g @jacky777/gm-cli
 ```
 
 > 需要 Node.js >= 16，安装后会自动选择对应平台的二进制。

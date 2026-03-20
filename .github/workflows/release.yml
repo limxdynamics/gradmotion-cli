@@ -9,6 +9,7 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
 
 jobs:
   release:
@@ -63,9 +64,14 @@ jobs:
           cd npm && npm version ${VERSION} --no-git-tag-version --allow-same-version
 
       - name: Publish npm package
-        # vendor 已由上一步填好，跳过 prepack 避免重复编译
         run: |
           echo "//registry.npmjs.org/:_authToken=${JACKY_NPM_TOKEN}" > npm/.npmrc
-          cd npm && npm publish --access public --ignore-scripts
+          VERSION=${GITHUB_REF_NAME#v}
+          if [[ "$VERSION" == *-* ]]; then
+            NPM_TAG=$(echo "$VERSION" | sed 's/.*-//')
+            cd npm && npm publish --access public --ignore-scripts --tag "$NPM_TAG"
+          else
+            cd npm && npm publish --access public --ignore-scripts
+          fi
         env:
           JACKY_NPM_TOKEN: ${{ secrets.JACKY_NPM_TOKEN }}

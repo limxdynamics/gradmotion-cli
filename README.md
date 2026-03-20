@@ -19,7 +19,7 @@ Cross-platform CLI for managing training tasks and projects on [Gradmotion](http
 ### npm (recommended)
 
 ```bash
-npm install -g @limxdynamics/gm-cli
+npm install -g @jacky777/gm-cli
 ```
 
 > Requires Node.js >= 16. The installer auto-selects the correct binary for your OS/architecture.
@@ -223,7 +223,7 @@ Push a semantic version tag, and [GitHub Actions](./.github/workflows/release.ym
 
 1. Build/package all target platforms with GoReleaser
 2. Create GitHub Release and upload artifacts
-3. Publish npm package `@limxdynamics/gm-cli`
+3. Publish npm package `@jacky777/gm-cli`
 
 ```bash
 git tag -a v0.1.0 -m "Release v0.1.0"
