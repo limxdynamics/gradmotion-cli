@@ -19,7 +19,7 @@
 ### npm（推荐）
 
 ```bash
-npm install -g @limxdynatic-gradmotion/gradmotion-cli
+npm install -g @limxdynamics/gm-cli
 ```
 
 > 需要 Node.js >= 16，安装时自动匹配当前平台架构。
@@ -268,7 +268,7 @@ gradmotion-cli/
 
 1. GoReleaser 多平台编译打包
 2. 创建 GitHub Release 并上传产物
-3. 发布 npm 包 `@limxdynatic-gradmotion/gradmotion-cli`
+3. 发布 npm 包 `@limxdynamics/gm-cli`
 
 ```bash
 git tag -a v0.1.0 -m "Release v0.1.0"

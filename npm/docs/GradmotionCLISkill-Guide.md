@@ -10,8 +10,8 @@
 | 步骤 | 操作 |
 |------|------|
 | **1. 创建 API Key** | 登录 Gradmotion → 左下角头像 → **API Key 管理** → **新建** → 填写名称并**立即复制**生成的 Key（格式 `gm_sk_xxxxxxxx`，仅显示一次）。 |
-| **2. 安装 CLI** | 执行 `npm install -g @limxdynatic-gradmotion/gradmotion-cli`（需 Node.js >= 16）。安装后执行 `gm --version` 确认。 |
-| **3. 配置** | `gm config set base_url "https://spaces.gradmotion.com/prod-api"`<br>`gm auth login --api-key "gm_sk_你的Key"` |
+| **2. 安装 CLI** | 执行 `npm install -g @limxdynamics/gm-cli`（需 Node.js >= 16）。安装后执行 `gm --version` 确认。 |
+| **3. 配置** | `gm config set base_url "https://spaces.gradmotion.com/dev-api"`<br>`gm auth login --api-key "gm_sk_你的Key"` |
 | **4. 验证** | `gm auth status`（本地）→ `gm auth whoami`（服务端）。 |
 | **5. 安装 Skill** | `mkdir -p ~/.cursor/skills/gm-cli`，将 [SKILL.md](../npm/skills/gm-cli/SKILL.md) 放到该目录；或在 Cursor **Settings → Features → Agent Skills** 确认 Skills 路径为 `~/.cursor/skills/`。 |
 | **6. 使用** | 在 Cursor Agent 里直接说「帮我列出任务」「查看任务 task_xxx 详情」等，或输入 `gm task list`；提到 `gm`、Gradmotion、任务、项目时 Agent 会自动使用 gm-cli Skill。 |
@@ -61,7 +61,7 @@
 ### 2.1 通过 npm 安装（推荐）
 
 ```bash
-npm install -g @limxdynatic-gradmotion/gradmotion-cli
+npm install -g @limxdynamics/gm-cli
 ```
 
 > 需要 Node.js >= 16，安装后会自动选择对应平台的二进制。
@@ -85,7 +85,7 @@ gradmotion-cli v0.1.0 (darwin/arm64)
 ### 3.1 设置服务地址（base_url）
 
 ```bash
-gm config set base_url "https://spaces.gradmotion.com/prod-api"
+gm config set base_url "https://spaces.gradmotion.com/dev-api"
 ```
 
 > `base_url` 为 Gradmotion 后端服务地址，CLI 会在此基础上拼接 `/api` 前缀发起请求。
@@ -122,7 +122,7 @@ CLI 会优先将 Key 存入系统 Keychain（macOS Keychain / Windows Credential
 ```yaml
 profiles:
   default:
-    base_url: https://spaces.gradmotion.com/prod-api
+    base_url: https://spaces.gradmotion.com/dev-api
     timeout: 30s
     retry: 3
     concurrency: 4
@@ -136,7 +136,7 @@ current: default
 ```bash
 # 创建 dev profile
 gm config profile set dev \
-  --base-url "https://dev.gradmotion.com/prod-api" \
+  --base-url "https://dev.gradmotion.com/dev-api" \
   --timeout 30s \
   --retry 3
 
@@ -167,7 +167,7 @@ gm auth status
   "success": true,
   "data": {
     "profile": "default",
-    "base_url": "https://spaces.gradmotion.com/prod-api",
+    "base_url": "https://spaces.gradmotion.com/dev-api",
     "has_api_key": true,
     "key_source": "keychain"
   }
@@ -350,7 +350,7 @@ gm task run --task-id "task_xxx"
 如不想将 Key 持久化到本地，可通过环境变量临时注入：
 
 ```bash
-export GM_BASE_URL="https://spaces.gradmotion.com/prod-api"
+export GM_BASE_URL="https://spaces.gradmotion.com/dev-api"
 export GM_API_KEY="gm_sk_xxxxxxxxxxxxxxxx"
 
 gm task list
@@ -392,7 +392,7 @@ gm auth login --api-key "gm_sk_新的Key"
 **解决**：
 
 ```bash
-gm config set base_url "https://spaces.gradmotion.com/prod-api"
+gm config set base_url "https://spaces.gradmotion.com/dev-api"
 gm auth status  # 确认 base_url 已生效
 ```
 

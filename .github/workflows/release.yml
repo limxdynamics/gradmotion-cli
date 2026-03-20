@@ -1,7 +1,7 @@
 # Gradmotion CLI 发布流水线
 # 推送 tag（如 v0.1.0）后自动发布到 GitHub Release 和 npm
 # 需在 GitHub 仓库 Settings → Secrets and variables → Actions 中配置：
-#   NPM_TOKEN：npm Automation Token（用于 npm publish）
+#   JACKY_NPM_TOKEN：npm Automation Token（用于 npm publish）
 
 name: Release
 
@@ -65,7 +65,7 @@ jobs:
       - name: Publish npm package
         # vendor 已由上一步填好，跳过 prepack 避免重复编译
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > npm/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${JACKY_NPM_TOKEN}" > npm/.npmrc
           cd npm && npm publish --access public --ignore-scripts
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          JACKY_NPM_TOKEN: ${{ secrets.JACKY_NPM_TOKEN }}
