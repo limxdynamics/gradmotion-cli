@@ -9,7 +9,7 @@
 [![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)]()
 
 Cross-platform CLI for managing projects and training tasks on
-[Flux](https://gm-spaces.limxdynamics.com), LimX Dynamics' training
+Flux, LimX Dynamics' training
 platform: create, run, monitor, pull logs and model checkpoints, and more.
 
 The CLI outputs structured JSON by default and is built for scripting and

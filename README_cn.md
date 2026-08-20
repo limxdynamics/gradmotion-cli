@@ -8,7 +8,7 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D16-brightgreen)](https://nodejs.org)
 [![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)]()
 
-跨平台命令行工具，用于管理 LimX Dynamics 训练平台 [Flux](https://gm-spaces.limxdynamics.com) 上的项目（project）与训练任务（task）：创建、运行、监控、拉取日志与模型 checkpoint 等。
+跨平台命令行工具，用于管理 LimX Dynamics 训练平台 Flux 上的项目（project）与训练任务（task）：创建、运行、监控、拉取日志与模型 checkpoint 等。
 
 CLI 默认输出结构化 JSON，面向脚本自动化与 AI Agent 集成设计——可以把 `gm` 交给编程 Agent 去操作训练任务，不需要额外写 SDK。
 
