@@ -1,5 +1,6 @@
-# 中文 | [English](README.md)
-
+<p align="center">
+  <a href="README.md">English</a> | <b>中文</b>
+</p>
 
 # Flux CLI (`gm`)
 
