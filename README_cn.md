@@ -10,6 +10,8 @@
 [![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)]()
 [![微信开发者社区](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-%E5%BC%80%E5%8F%91%E8%80%85%E7%A4%BE%E5%8C%BA-07C160?logo=wechat&logoColor=white)](https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png)
 
+<p><sub>合作采购请联系 <a href="mailto:opensource@limxdynamics.com">opensource@limxdynamics.com</a></sub></p>
+
 跨平台命令行工具，用于管理 LimX Dynamics 训练平台 Flux 上的项目（project）与训练任务（task）：创建、运行、监控、拉取日志与模型 checkpoint 等。
 
 CLI 默认输出结构化 JSON，面向脚本自动化与 AI Agent 集成设计——可以把 `gm` 交给编程 Agent 去操作训练任务，不需要额外写 SDK。
