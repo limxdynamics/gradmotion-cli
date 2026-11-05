@@ -2,17 +2,13 @@
   <b>English</b> | <a href="README_cn.md">中文</a>
 </p>
 
-<!-- limx-community:start -->
-<!-- Managed by limxdynamics/limxdynamics/.github/community/sync_community.py; QR code: doc/wechat_qr.png in that repo -->
-<p align="center"><a href="https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png"><img src="https://img.shields.io/badge/Join%20Our%20WeChat%20Community-All%20Projects%20Welcome-07C160?style=for-the-badge&logo=wechat&logoColor=white" alt="WeChat Community"></a></p>
-<!-- limx-community:end -->
-
 # Flux CLI (`gm`)
 
 [![npm](https://img.shields.io/npm/v/@limxdynamics/gm-cli)](https://www.npmjs.com/package/@limxdynamics/gm-cli)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D16-brightgreen)](https://nodejs.org)
 [![Platforms](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)]()
+[![WeChat Community](https://img.shields.io/badge/WeChat-Developer%20Community-07C160?logo=wechat&logoColor=white)](https://github.com/limxdynamics/limxdynamics/blob/main/doc/wechat_qr.png)
 
 Cross-platform CLI for managing projects and training tasks on
 Flux, LimX Dynamics' training
