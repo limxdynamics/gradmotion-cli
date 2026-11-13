@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="docs/flux-cli-banner.png" alt="Flux CLI：TRON1 机器人从未训练到训练完成，即 gm 在 Flux 上管理的训练任务" width="100%">
+</p>
+
+<p align="center">
   <a href="README.md">English</a> | <b>中文</b>
 </p>
 
@@ -18,7 +22,7 @@ CLI 默认输出结构化 JSON，面向脚本自动化与 AI Agent 集成设计�
 
 > **关于本仓库**：本仓库当前用作 Flux CLI 的公开主页（仅含 `LICENSE`，GitHub 上没有发布 Release 或二进制文件）。工具的**唯一发布渠道是 npm 包** [`@limxdynamics/gm-cli`](https://www.npmjs.com/package/@limxdynamics/gm-cli)，其中打包了 macOS / Linux / Windows（amd64 / arm64）共 6 个平台的 Go 编译产物。下文所有命令与输出，均基于对 npm 最新发布版本（`0.1.14`）的实际安装与运行验证。
 
-## 功能特性
+## 亮点
 
 - **跨平台单文件二进制**：macOS / Linux / Windows，amd64 / arm64。`npm install` 只是根据平台选出 `vendor/` 里对应的二进制并直接调用（执行阶段不依赖 Node.js，只有安装阶段用到）。
 - **Agent 友好**：默认输出结构化 JSON（`{success, data, meta, error}`），并附带 [`skills/gm-cli/SKILL.md`](#ai-agent-集成) 技能文件（配套文档写的是配合 **Cursor 的 Agent Skills** 使用；这个格式理论上也可能适配其他编程 Agent 的技能系统，但目前没有文档明确支持）。
@@ -27,6 +31,41 @@ CLI 默认输出结构化 JSON，面向脚本自动化与 AI Agent 集成设计�
 - **安全鉴权存储**：`auth login` 保存的 API Key 会写入系统密钥库（macOS Keychain / Windows 凭据管理器 / Linux Secret Service），仅在本地无密钥库时才会回退到配置文件。
 - **健壮请求**：内置重试（指数退避）、可配置超时与并发；所有写操作支持 `--dry-run` 预览请求而不实际执行。
 - **明确的退出码**：不同错误类型对应不同退出码，方便脚本/CI 判断执行结果。
+
+## 工作原理
+
+<p align="center">
+  <img src="docs/flux-cli-how-it-works-cn.png" alt="终端用户、CI 脚本和编码 Agent 调用 gm；gm 向 Flux API 发送 HTTPS 请求并输出 JSON 信封；Flux 管理项目、任务、日志、超参数、曲线数据和模型 checkpoint" width="100%">
+</p>
+
+## 30 秒体验
+
+不需要账号和 API Key：`--dry-run` 只打印 `gm` 将要发送的请求，并以退出码 `10` 结束。
+
+```bash
+npx -y @limxdynamics/gm-cli@0.1.14 --dry-run project create --data '{"projectName":"demo"}'
+```
+
+```json
+{
+  "success": true,
+  "data": {
+    "action": "gm project create",
+    "body": {
+      "projectName": "demo"
+    },
+    "dry_run": true,
+    "endpoint": "/project/create",
+    "method": "POST",
+    "query": null
+  },
+  "meta": {
+    "command": "gm project create",
+    "profile": "prod"
+  },
+  "error": null
+}
+```
 
 ## 安装
 
@@ -50,7 +89,7 @@ $ gm --version
 }
 ```
 
-## 快速开始
+## 使用账号快速开始
 
 ```bash
 # 1. 登录（API Key 会写入系统密钥库 / 配置文件）
@@ -185,12 +224,18 @@ profiles:
 
 ## AI Agent 集成
 
+<p align="center">
+  <img src="docs/flux-cli-agent-flow-cn.png" alt="先用 --dry-run 预览（退出码 10），再加 --yes 执行（退出码 0），然后跟踪日志；管道中未加 --yes 的写操作以退出码 2 NON_INTERACTIVE 失败" width="100%">
+</p>
+
 npm 包内随附 [`skills/gm-cli/SKILL.md`](https://www.npmjs.com/package/@limxdynamics/gm-cli) 与 `docs/GradmotionCLISkill-Guide.md`。官方教程文档写的是配合 **Cursor 的 Agent Skills** 安装使用（`~/.cursor/skills/gm-cli`）；技能文件的格式理论上也可能适配其他编程 Agent 的技能系统，但文档里没有明确写支持。技能文件里的关键约束：
 
 - **非交互环境会自动检测**：CLI 检测到 stdin 非终端时，危险操作（create/edit/run/stop/delete 等）不会挂起等待确认，而是直接以退出码 `2` 失败——Agent 执行这类命令时**必须显式加 `--yes`**。
 - **写操作建议先 `--dry-run`**：预览请求 body / endpoint 确认无误后，再去掉 `--dry-run` 正式执行。
 - 涉及文件建议使用相对路径（如 `--file ./payload.json`），执行成功后清理临时 JSON 文件。
 - 所有输出默认是 JSON，便于 Agent 直接解析而无需匹配人类可读文本。
+
+> **0.1.14 注意事项：** stdin 重定向自 `/dev/null` 时会被当作终端。此时确认提示读到文件结束，操作被跳过，`gm` 以退出码 `0` 返回并带 `"skipped": true`。Agent 应始终显式传 `--yes`，不要依赖非交互检测。
 
 ## License
 

@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="docs/flux-cli-banner.png" alt="Flux CLI: a TRON1 robot going from untrained to a trained policy, the training runs gm manages on Flux" width="100%">
+</p>
+
+<p align="center">
   <b>English</b> | <a href="README_cn.md">中文</a>
 </p>
 
@@ -30,7 +34,7 @@ tasks without writing a separate SDK integration.
 > below were verified by actually installing and running the latest
 > published version (`0.1.14`).
 
-## Features
+## Highlights
 
 - **Cross-platform single-binary** — macOS / Linux / Windows, amd64 /
   arm64. `npm install` just picks the right binary from `vendor/` and
@@ -53,6 +57,41 @@ tasks without writing a separate SDK integration.
   timeout/concurrency; every write operation supports `--dry-run`.
 - **Explicit exit codes** — distinct exit codes per error category, for
   scripting/CI.
+
+## How it works
+
+<p align="center">
+  <img src="docs/flux-cli-how-it-works.png" alt="You, CI scripts and coding agents call gm; gm sends HTTPS requests to the Flux API and prints a JSON envelope; Flux runs projects, tasks, logs, hyperparameters, chart data and model checkpoints" width="100%">
+</p>
+
+## Try it in 30 seconds
+
+No account or API key needed: `--dry-run` prints the request `gm` would send and exits with code `10`.
+
+```bash
+npx -y @limxdynamics/gm-cli@0.1.14 --dry-run project create --data '{"projectName":"demo"}'
+```
+
+```json
+{
+  "success": true,
+  "data": {
+    "action": "gm project create",
+    "body": {
+      "projectName": "demo"
+    },
+    "dry_run": true,
+    "endpoint": "/project/create",
+    "method": "POST",
+    "query": null
+  },
+  "meta": {
+    "command": "gm project create",
+    "profile": "prod"
+  },
+  "error": null
+}
+```
 
 ## Installation
 
@@ -78,7 +117,7 @@ $ gm --version
 }
 ```
 
-## Quick Start
+## Quick Start with your account
 
 ```bash
 # 1. Log in (API key goes to the system keychain / config file)
@@ -217,6 +256,10 @@ profiles:
 
 ## AI Agent Integration
 
+<p align="center">
+  <img src="docs/flux-cli-agent-flow.png" alt="Preview with --dry-run (exit 10), run with --yes (exit 0), follow logs; a write piped without --yes fails with exit 2 NON_INTERACTIVE" width="100%">
+</p>
+
 The npm package bundles
 [`skills/gm-cli/SKILL.md`](https://www.npmjs.com/package/@limxdynamics/gm-cli)
 and `docs/GradmotionCLISkill-Guide.md`. The shipped guide documents
@@ -235,6 +278,11 @@ skill file:
   and clean up temporary JSON files after a successful call.
 - All output is JSON by default, so an agent can parse it directly without
   matching human-readable text.
+
+> **Note for 0.1.14:** stdin redirected from `/dev/null` is treated as a
+> terminal. The confirmation prompt then reads end-of-file, the operation is
+> skipped, and `gm` exits with `0` and `"skipped": true`. Agents should always
+> pass `--yes` rather than rely on the non-interactive check.
 
 ## License
 
